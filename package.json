@@ -1,0 +1,25 @@
+{
+  "name": "graphql-playground",
+  "version": "1.0.0",
+  "description": "A space to explore GraphQL basics, patterns and advanced queries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjmeilahn/graphql-playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjmeilahn/graphql-playground/issues"
+  },
+  "homepage": "https://github.com/mjmeilahn/graphql-playground#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
+    "lodash": "^4.17.21"
+  }
+}
