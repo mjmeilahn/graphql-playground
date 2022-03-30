@@ -1,25 +1,13 @@
 
+const axios = require('axios')
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, } = graphql
 
-const users = [
-    {
-        id: '23',
-        firstName: 'Kirk',
-        age: 34
-    },
-    {
-        id: '47',
-        firstName: 'Picard',
-        age: 45
-    },
-]
-
-const UserType = new GraphQLObjectType({
-    name: 'User',
+const CharacterType = new GraphQLObjectType({
+    name: 'Character',
     fields: {
         id: { type: GraphQLString },
-        firstName: { type: GraphQLString },
+        name: { type: GraphQLString },
         age: { type: GraphQLInt },
     }
 })
@@ -27,11 +15,11 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-        user: {
-            type: UserType,
+        character: {
+            type: CharacterType,
             args: { id: { type: GraphQLString } },
             resolve(parentValue, args) {
-                return users.find(u => u.id === args.id)
+                return axios.get(`http://localhost:3000/characters/${args.id}`).then(res => res.data)
             }
         }
     }

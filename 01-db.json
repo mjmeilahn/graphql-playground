@@ -1,0 +1,34 @@
+{
+    "characters": [
+        {
+            "id": "23",
+            "name": "Kirk",
+            "age": "34",
+            "factionId": "1"
+        },
+        {
+            "id": "47",
+            "name": "Picard",
+            "age": "45",
+            "factionId": "1"
+        },
+        {
+            "id": "41",
+            "name": "The Borg Queen",
+            "age": "33",
+            "factionId": "2"
+        }
+    ],
+    "factions": [
+        {
+            "id": "1",
+            "name": "Galactic Federation of Planets",
+            "description": "The Good Guys"
+        },
+        {
+            "id": "2",
+            "name": "The Borg",
+            "description": "The Bad Guys"
+        }
+    ]
+}
