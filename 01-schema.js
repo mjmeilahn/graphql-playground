@@ -64,10 +64,11 @@ const mutation = new GraphQLObjectType({
                 factionId: { type: GraphQLString }, // OPTIONAL FIELD
             },
             resolve(parentValue, args) {
-                const { name, age } = args
+                const { name, age, factionId } = args
                 return axios.post(`http://localhost:3000/characters`, {
                     name,
-                    age
+                    age,
+                    factionId,
                 }).then(res => res.data)
             }
         },
@@ -78,6 +79,23 @@ const mutation = new GraphQLObjectType({
             },
             resolve(parentValue, args) {
                 return axios.delete(`http://localhost:3000/characters/${args.id}`).then(res => res.data)
+            }
+        },
+        editCharacter: {
+            type: CharacterType,
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLString) },
+                name: { type: GraphQLString },
+                age: { type: GraphQLInt },
+                factionId: { type: GraphQLString },
+            },
+            resolve(parentValue, args) {
+                const { id, name, age, factionId } = args
+                return axios.patch(`http://localhost:3000/characters/${id}`, {
+                    name,
+                    age,
+                    factionId,
+                }).then(res => res.data)
             }
         }
     }
