@@ -18,6 +18,12 @@ const CharacterType = new GraphQLObjectType({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
+        faction: {
+            type: FactionType,
+            resolve(parentValue, args) {
+                return axios.get(`http://localhost:3000/factions/${parentValue.factionId}`).then(res => res.data)
+            }
+        }
     }
 })
 
@@ -29,6 +35,13 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLString } },
             resolve(parentValue, args) {
                 return axios.get(`http://localhost:3000/characters/${args.id}`).then(res => res.data)
+            }
+        },
+        faction: {
+            type: FactionType,
+            args: { id: { type: GraphQLString } },
+            resolve(parentValue, args) {
+                return axios.get(`http://localhost:3000/factions/${args.id}`).then(res => res.data)
             }
         }
     }
