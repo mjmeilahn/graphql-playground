@@ -3,6 +3,15 @@ const axios = require('axios')
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, } = graphql
 
+const FactionType = new GraphQLObjectType({
+    name: 'Faction',
+    fields: {
+        id: { type: GraphQLString },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+    }
+})
+
 const CharacterType = new GraphQLObjectType({
     name: 'Character',
     fields: {
