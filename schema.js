@@ -1,4 +1,8 @@
 
+/*
+    NOT LISTED IN THIS EXAMPLE: ALIASES, VARIABLES OR DIRECTIVES.
+*/
+
 const axios = require('axios')
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull, } = graphql
@@ -46,6 +50,7 @@ const FactionType = new GraphQLObjectType({
         description: { type: GraphQLString },
         characters: {
             type: new GraphQLList(CharacterType),
+            // THESE URLs PASSED INTO AXIOS REFLECT A RESTFUL API APPROACH, HOWEVER NOT ALL DATABASES WILL FOLLOW THIS CONVENTION.
             resolve(parentValue, args) {
                 return axios.get(`http://localhost:3000/factions/${parentValue.id}/characters`).then(res => res.data)
             }
@@ -64,6 +69,25 @@ const FactionType = new GraphQLObjectType({
                 id
                 name
                 description
+            }
+        }
+    }
+
+
+    RESPONSE TO THE ABOVE QUERY:
+
+    {
+        "data": {
+            "character": {
+                "name": "The Borg Queen",
+                "age": "3410",
+                "faction": [
+                    {
+                        "id": "2",
+                        "name": "The Borg",
+                        "description": "The Bad Guys"
+                    }
+                ]
             }
         }
     }
@@ -111,10 +135,15 @@ const RootQuery = new GraphQLObjectType({
 })
 
 /*
-    EXAMPLE MUTATION USING "addCharacter" IN GRAPHQL.
+    EXAMPLE MUTATION USING "addCharacter" IN GRAPHQL. THE FIELDS INSIDE OF "addCharacter" ARE JUST A RESPONSE IF YOU REQUIRE THEM AFTER THE MUTATION. THE SERVER WILL CREATE THE "id". MUTATIONS CAN BE USED FOR ALL CRUD OPERATIONS EXCEPT READING WHICH IS WHAT "query" IS FOR.
 
     mutation {
-        addCharacter(name:"Worff")
+        addCharacter(name: "Worff", age: 33, factionId: "1") {
+            id
+            name
+            age
+            factionId
+        }
     }
 */
 
