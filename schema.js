@@ -17,6 +17,25 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList
             }
         }
     }
+
+
+    RESPONSE TO THE ABOVE QUERY:
+
+    {
+        "data": {
+            "faction": {
+                "name": "The Borg",
+                "description": "The Bad Guys",
+                "characters": [
+                    {
+                        "id": "41",
+                        "name": "The Borg Queen",
+                        "age": "3410"
+                    }
+                ]
+            }
+        }
+    }
 */
 
 const FactionType = new GraphQLObjectType({
@@ -65,6 +84,12 @@ const CharacterType = new GraphQLObjectType({
     })
 })
 
+/*
+    THE REASON WE SPECIFY "id" IN THE EXAMPLES ABOVE IS THE "args" OBJECT PASSED INTO THE RESPECTIVE SCHEMA.
+
+    INSTEAD OF ACCESSING "localhost" PORT 3000 FOR DATA YOU WOULD QUERY A DATABASE.s
+*/
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -84,6 +109,14 @@ const RootQuery = new GraphQLObjectType({
         }
     }
 })
+
+/*
+    EXAMPLE MUTATION USING "addCharacter" IN GRAPHQL.
+
+    mutation {
+        addCharacter(name:"Worff")
+    }
+*/
 
 const mutation = new GraphQLObjectType({
     name: 'Mutation',
