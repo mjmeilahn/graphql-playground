@@ -3,6 +3,22 @@ const axios = require('axios')
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull, } = graphql
 
+/*
+    EXAMPLE: READING A FACTION'S DETAILS IN GRAPHQL. THE "query" KEYWORD IS OPTIONAL DEPENDING ON YOUR SETUP. OUT-OF-THE-BOX GRAPHQL LISTS IT AS OPTIONAL.
+
+    query {
+        faction (id: "2") {
+            name
+            description
+            characters {
+                id
+                name
+                age
+            }
+        }
+    }
+*/
+
 const FactionType = new GraphQLObjectType({
     name: 'Faction',
     fields: () => ({
@@ -17,6 +33,22 @@ const FactionType = new GraphQLObjectType({
         }
     })
 })
+
+/*
+    EXAMPLE: READING A CHARACTER'S DETAILS IN GRAPHQL.
+
+    query {
+        character(id: "41") {
+            name
+            age
+            faction {
+                id
+                name
+                description
+            }
+        }
+    }
+*/
 
 const CharacterType = new GraphQLObjectType({
     name: 'Character',

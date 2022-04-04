@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "basics:server": "json-server --watch 01-db.json",
-    "basics": "nodemon 01-basics.js"
+    "start:server": "json-server --watch db.json",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
